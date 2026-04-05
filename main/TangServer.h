@@ -120,13 +120,15 @@ void setup() {
     startSTAMode();
 
     // --- Setup Server Routes ---
-    server_http.on("/adv", HTTP_GET, handleAdv);
-    server_http.on("/rec", HTTP_POST, handleRec);
-    server_http.on("/pub", HTTP_GET, handlePub);
-    server_http.on("/activate", HTTP_POST, handleActivate);
-    server_http.on("/deactivate", HTTP_GET, handleDeactivate); // Simple deactivate
-    server_http.on("/deactivate", HTTP_POST, handleDeactivate); // Deactivate and set new password
-    server_http.on("/reboot", HTTP_GET, handleReboot);
+
+    // 
+    server_http.on(UriRegex("^/adv/?$"), HTTP_GET, handleAdv);
+    server_http.on(UriRegex("^/rec/?$"), HTTP_POST, handleRec);
+    server_http.on(UriRegex("^/pub/?$"), HTTP_GET, handlePub);
+    server_http.on(UriRegex("^/activate/?$"), HTTP_POST, handleActivate);
+    server_http.on(UriRegex("^/deactivate/?$"), HTTP_GET, handleDeactivate); // Simple deactivate
+    server_http.on(UriRegex("^/deactivate/?$"), HTTP_POST, handleDeactivate); // Deactivate and set new password
+    server_http.on(UriRegex("^/reboot/?$"), HTTP_GET, handleReboot);
     server_http.onNotFound(handleNotFound);
 
     server_http.begin();
